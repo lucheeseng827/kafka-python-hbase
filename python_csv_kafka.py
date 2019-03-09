@@ -20,6 +20,9 @@ for i in xrange(100):
     bytes_writer = io.BytesIO()
     encoder = avro.io.BinaryEncoder(bytes_writer)
     #writer.write("name", encoder)
-    writer.write({"name":"{!r}".format(i),"favorite_color": str(random.randint(0,100)),"favorite_number": str(random.randint(0,100))}, encoder) 
+    writer.write({"name":"{!r}".format(i),
+                  "favorite_color": str(random.randint(0,100)),
+                  "favorite_number": str(random.randint(0,100))},
+                 encoder)
     raw_bytes = bytes_writer.getvalue()
     producer.send_messages(topic, raw_bytes)
